@@ -1,0 +1,54 @@
+# Dependencies
+node_modules/
+
+# Build output and tool caches
+dist/
+dist-ssr/
+.vite/
+.vite-temp/
+.cache/
+.eslintcache
+.prettiercache
+*.tsbuildinfo
+
+# Test coverage and browser test output
+coverage/
+.nyc_output/
+test-results/
+playwright-report/
+playwright/.cache/
+
+# Local environment configuration (keep shareable examples)
+.env
+.env.*
+*.local
+!.env.example
+!.env.*.example
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Temporary files
+/tmp/
+/temp/
+*.tmp
+*.temp
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea/
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
