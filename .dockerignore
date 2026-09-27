@@ -1,0 +1,14 @@
+# 构建上下文里剔除本地产物与元数据。
+# ⚠️ 不要排除 nginx.conf：运行阶段要 COPY 它进镜像，排除掉就找不到文件了。
+node_modules/
+dist/
+.git/
+.gitignore
+.vscode/
+.idea/
+*.log
+docs/
+README.md
+AGENTS.md
+Dockerfile
+.dockerignore
