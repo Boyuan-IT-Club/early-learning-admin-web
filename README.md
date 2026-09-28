@@ -75,6 +75,8 @@ early-learning-admin-web/
 │  ├─ pages/
 │  │  ├─ Login.tsx         # 演示登录
 │  │  ├─ Licenses.tsx      # 激活码列表、筛选与示例生成
+│  │  ├─ Files.tsx        # 官方素材：真实上传 / 列表 / 标记删除
+│  │  ├─ AiScore.tsx      # AI 试评：故事评分与单题评分（真实接口）
 │  │  ├─ Teachers.tsx      # 教师列表与用量跳转
 │  │  ├─ Content.tsx       # 课程 / 评估 / 字典共用页面
 │  │  └─ ApiUsage.tsx      # API 用量列表与筛选

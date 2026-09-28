@@ -5,6 +5,7 @@ import { AdminLayout } from "../layouts/AdminLayout";
 import { Login } from "../pages/Login";
 import { Licenses } from "../pages/Licenses";
 import { Teachers } from "../pages/Teachers";
+import { AiScore } from "../pages/AiScore";
 import { ApiUsage } from "../pages/ApiUsage";
 import { Content } from "../pages/Content";
 import { Files } from "../pages/Files";
@@ -61,6 +62,7 @@ export function AppRoutes({
         />
         <Route path="/files" element={<Files />} />
         <Route path="/api-usage" element={<ApiUsage />} />
+        <Route path="/ai-score" element={<AiScore />} />
         <Route
           path="*"
           element={
