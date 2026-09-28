@@ -24,7 +24,9 @@ const links: { path: string; label: string; icon: IconName; group: string }[] =
       icon: "dictionary",
       group: "内容管理",
     },
+    { path: "/files", label: "官方素材", icon: "file", group: "内容管理" },
     { path: "/api-usage", label: "API 用量", icon: "usage", group: "使用情况" },
+    { path: "/ai-score", label: "AI 试评", icon: "clipboard", group: "使用情况" },
   ];
 export function AdminLayout({ onLogout }: { onLogout: () => void }) {
   const [menuOpen, setMenuOpen] = useState(false);

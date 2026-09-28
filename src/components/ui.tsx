@@ -134,6 +134,9 @@ export function Badge({ status }: { status: string }) {
     REVOKED: "已撤销",
     INACTIVE: "未激活",
     READY: "可用",
+    UPLOADING: "上传中",
+    INVALID: "无效",
+    DELETED: "已删除",
   };
   return (
     <span className={`badge badge-${status.toLowerCase()}`}>

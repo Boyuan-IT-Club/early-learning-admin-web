@@ -5,8 +5,10 @@ import { AdminLayout } from "../layouts/AdminLayout";
 import { Login } from "../pages/Login";
 import { Licenses } from "../pages/Licenses";
 import { Teachers } from "../pages/Teachers";
+import { AiScore } from "../pages/AiScore";
 import { ApiUsage } from "../pages/ApiUsage";
 import { Content } from "../pages/Content";
+import { Files } from "../pages/Files";
 interface Props {
   signedIn: boolean;
   onSessionChange: (value: boolean) => void;
@@ -58,7 +60,9 @@ export function AppRoutes({
           path="/content/dictionaries"
           element={<Content key="dictionaries" kind="dictionaries" />}
         />
+        <Route path="/files" element={<Files />} />
         <Route path="/api-usage" element={<ApiUsage />} />
+        <Route path="/ai-score" element={<AiScore />} />
         <Route
           path="*"
           element={

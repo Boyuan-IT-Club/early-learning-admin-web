@@ -10,6 +10,7 @@ import {
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import "@testing-library/jest-dom/vitest";
 import App from "./App";
+import { getAccessToken, setAccessToken } from "./api/auth";
 
 beforeEach(() => {
   sessionStorage.clear();
@@ -29,7 +30,7 @@ afterEach(() => {
 });
 
 function enter(path = "/licenses") {
-  sessionStorage.setItem("early-learning-demo", "yes");
+  setAccessToken("test-token");
   window.history.replaceState({}, "", path);
   render(<App />);
 }
@@ -45,12 +46,12 @@ describe("demo workbench", () => {
     expect(
       screen.getByRole("heading", { name: "激活码管理" }),
     ).toBeInTheDocument();
-    expect(sessionStorage.getItem("early-learning-demo")).toBe("yes");
+    expect(getAccessToken()).not.toBeNull();
     fireEvent.click(screen.getByRole("button", { name: "退出登录" }));
     expect(
       screen.getByRole("heading", { name: "欢迎来到初芽" }),
     ).toBeInTheDocument();
-    expect(sessionStorage.getItem("early-learning-demo")).toBeNull();
+    expect(getAccessToken()).toBeNull();
   });
 
   it("generates a batch, copies it, and filters the resulting records", async () => {
