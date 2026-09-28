@@ -524,7 +524,7 @@ export function AiScore() {
         </p>
       )}
 
-      <div className="tabs" aria-label="评分类型">
+      <div className="tabs ai-tabs" aria-label="评分类型">
         <button className={tab === "story" ? "selected" : ""} disabled={busy} onClick={() => setTab("story")}>
           故事评分（18 项）
         </button>
@@ -533,7 +533,7 @@ export function AiScore() {
         </button>
       </div>
 
-      <section className="panel">
+      <section className="panel ai-panel">
         <h2 className="section-title">
           <span className="section-icon">
             <Icon name="clipboard" />
@@ -724,7 +724,7 @@ export function AiScore() {
           </>
         )}
 
-        <div className="panel-toolbar">
+        <div className="ai-fields">
           <label className="form-field">
             业务类型
             <select value={businessType} onChange={(event) => setBusinessType(event.target.value as BusinessType)}>
@@ -774,7 +774,7 @@ export function AiScore() {
       </section>
 
       {handle && (
-        <section className="panel">
+        <section className="panel ai-panel">
           <h2 className="section-title">
             <span className="section-icon">
               <Icon name="usage" />
@@ -804,7 +804,7 @@ export function AiScore() {
       )}
 
       {task?.stage === "FAILED" && (
-        <section className="panel">
+        <section className="panel ai-panel">
           <h2 className="section-title">任务失败</h2>
           <div className="result-box error-result" role="alert">
             <p>
@@ -828,14 +828,14 @@ function renderStoryResult(task: AiTask, confirmedText: string) {
   const score = (task.result as { ai_score?: AiScore }).ai_score;
   if (!score) {
     return (
-      <section className="panel">
+      <section className="panel ai-panel">
         <EmptyState text="任务成功但没有评分结果" hint="这通常是服务端契约变化，请刷新后重试。" />
       </section>
     );
   }
   return (
     <>
-      <section className="panel">
+      <section className="panel ai-panel">
         <h2 className="section-title">评分结果（AIScore v2）</h2>
         <p className="muted">
           模型 {score.model_meta.model}｜提示词 {score.model_meta.prompt_version}｜评分标准{" "}
@@ -879,7 +879,7 @@ function renderStoryResult(task: AiTask, confirmedText: string) {
         </div>
       </section>
 
-      <section className="panel">
+      <section className="panel ai-panel">
         <h3 className="section-title">宏观结构（6 项）</h3>
         <div className="table-scroll">
           <table>
@@ -899,7 +899,7 @@ function renderStoryResult(task: AiTask, confirmedText: string) {
         </div>
       </section>
 
-      <section className="panel">
+      <section className="panel ai-panel">
         <h3 className="section-title">微观结构（5 项）</h3>
         <div className="table-scroll">
           <table>
@@ -919,7 +919,7 @@ function renderStoryResult(task: AiTask, confirmedText: string) {
         </div>
       </section>
 
-      <section className="panel">
+      <section className="panel ai-panel">
         <h3 className="section-title">叙事产生性</h3>
         <p>
           <span className="code-text">{score.microstructure.productivity.item_code}</span>{" "}
@@ -950,13 +950,13 @@ function renderAnswerResult(task: AiTask) {
   const score = result?.ai_score;
   if (!score) {
     return (
-      <section className="panel">
+      <section className="panel ai-panel">
         <EmptyState text="任务成功但没有评分结果" hint="这通常是服务端契约变化，请刷新后重试。" />
       </section>
     );
   }
   return (
-    <section className="panel">
+    <section className="panel ai-panel">
       <h2 className="section-title">评分结果（QuestionAIScore）</h2>
       <p className="muted">
         题号 {result?.question_id ?? "—"}｜作答时机 {result?.attempt ?? "—"}｜模型{" "}
