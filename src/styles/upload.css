@@ -347,3 +347,33 @@ progress::-moz-progress-bar {
 .sidebar-overlay {
   display: none;
 }
+
+/* 批量上传队列:每个文件一行,自带状态、编号与操作 */
+.upload-queue {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.upload-queue-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid var(--line, #dcdcd2);
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+
+.upload-queue-main {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.upload-queue-main code {
+  font-size: 12px;
+}
