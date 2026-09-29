@@ -4,7 +4,7 @@ import { deleteOfficialFile, listFiles } from "../api/files";
 import type { AdminFile, AdminFilePage, CloudFileKind, CloudFileStatus } from "../api/files";
 import { OfficialFileUpload } from "../components/OfficialFileUpload";
 import { Badge, EmptyState, Icon, Modal, PageHeading, SearchInput } from "../components/ui";
-import { formatFileSize } from "../utils/format";
+import { formatFileSize, formatUtcToLocal } from "../utils/format";
 
 /** 删除失败的两种 409 要分别解释，其余直接显示服务端 message。 */
 const DELETE_HINTS: Record<string, string> = {
@@ -202,7 +202,7 @@ export function Files() {
                     {row.reference_count}
                     <span className="muted"> 处</span>
                   </td>
-                  <td className="muted numeric">{row.created_at.replace("T", " ").slice(0, 16)}</td>
+                  <td className="muted numeric">{formatUtcToLocal(row.created_at)}</td>
                   <td className="align-right">
                     <button
                       className="text-button"
