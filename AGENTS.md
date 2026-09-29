@@ -247,48 +247,30 @@ OSS 上传
 
 ---
 
-## 7. 推荐目录结构
+## 7. 目录结构（2026-09-29 起为现状，不再是"推荐"）
+
+按技术层组织，量小不再细拆（规范依据：外层仓库 `reference/adr/0008`）：
 
 ```text
 src/
-├─ api/
-│  ├─ client.ts
-│  ├─ auth.ts
-│  ├─ licenses.ts
-│  ├─ teachers.ts
-│  ├─ courses.ts
-│  ├─ assessments.ts
-│  ├─ dictionaries.ts
-│  └─ usage.ts
-│
-├─ components/
-│  ├─ DataTable/
-│  ├─ FileUpload/
-│  └─ Loading/
-│
-├─ layouts/
-│  └─ AdminLayout.tsx
-│
-├─ pages/
-│  ├─ Login/
-│  ├─ Licenses/
-│  ├─ Teachers/
-│  ├─ Courses/
-│  ├─ Assessments/
-│  ├─ Dictionaries/
-│  └─ ApiUsage/
-│
-├─ router/
-│  └─ index.tsx
-│
-├─ types/
-├─ utils/
-│
-├─ App.tsx
-└─ main.tsx
+├─ api/            ← 网络层唯一入口：client.ts（axios 实例/信封/401）、各资源的 api 模块、
+│                     contract.ts（服务端契约的**唯一镜像**：默认上限、MIME 白名单、失败码→人话）
+├─ components/     ← 可复用控件（ui/ 基件、OfficialFileUpload 等）
+├─ layouts/        ← AdminLayout（侧边导航骨架）
+├─ pages/          ← 页面（Login、Files；AiScore 在 ai-score/ 目录：index + useAiTask hook +
+│                     载荷转换 images.ts + 结果组件）
+├─ router/         ← 路由表
+├─ utils/          ── 纯函数工具
+├─ App.tsx / main.tsx
+└─ styles/          ← 设计系统分件（layout / components / ai-score / upload / login / responsive），
+                       由 App.css 按原始顺序 @import，级联与拆分前一致
 ```
 
-目录可以根据实际开发适当调整，但不要为了形式引入过度复杂的分层。
+约定：
+
+- 页面**不得**直连 axios，一律走 `api/`；服务端默认值 / 失败码文案**只允许写在 `api/contract.ts`**，第二份镜像一经发现算 bug。
+- **demo 与假数据不进 `src/`**。演示路由已删除；将来要演示，用独立入口或构建开关。
+- 页面按需新增，不预建空文件。
 
 ---
 

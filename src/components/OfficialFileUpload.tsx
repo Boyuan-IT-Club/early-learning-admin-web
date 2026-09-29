@@ -15,18 +15,7 @@ import { formatFileSize } from "../utils/format";
  * 「处理」这一段是真实存在的：文件传完到服务端落盘校验完返回 READY，中间没有进度可报。
  */
 
-/** 与服务端默认上限一致（`storage.upload.max-size-bytes`，默认 500MB）；服务端仍为准。 */
-const MAX_BYTES = 500 * 1024 * 1024;
-
-/** 失败码 → 人话补充。表里没有的码直接显示服务端 message。 */
-const ERROR_HINTS: Record<string, string> = {
-  PAYLOAD_TOO_LARGE: "文件超过服务端允许的上限，请压缩后再传。",
-  UNSUPPORTED_MEDIA_TYPE: "服务端不接受这种类型的素材。",
-  CONTENT_TYPE_MISMATCH: "文件内容与它的类型不符——请确认素材本身没有被改过后缀。",
-  IDEMPOTENCY_CONFLICT: "同一个请求标识已经提交过别的文件，请重新选择后再传。",
-  INVALID_REQUEST: "服务端认为本次请求不合法，请检查文件名与类型。",
-  DEPENDENCY_UNAVAILABLE: "服务端依赖暂不可用（对象存储等），请稍后重试。",
-};
+import { UPLOAD_ERROR_HINTS, UPLOAD_MAX_BYTES } from "../api/contract";
 
 type Phase = "idle" | "uploading" | "processing" | "done" | "error";
 
@@ -75,9 +64,9 @@ export function OfficialFileUpload({
       setFailure(new Error("只支持图片（png/jpg/gif/webp）、音频（mp3/wav/m4a/ogg/flac）与 PDF。"));
       return;
     }
-    if (selected.size === 0 || selected.size > MAX_BYTES) {
+    if (selected.size === 0 || selected.size > UPLOAD_MAX_BYTES) {
       setFile(null);
-      setFailure(new Error(`请选择非空且不超过 ${formatFileSize(MAX_BYTES)} 的文件。`));
+      setFailure(new Error(`请选择非空且不超过 ${formatFileSize(UPLOAD_MAX_BYTES)} 的文件。`));
       return;
     }
     setFile(selected);
@@ -115,7 +104,7 @@ export function OfficialFileUpload({
   }
 
   const errorCode = failure instanceof ApiError ? failure.code : null;
-  const errorHint = errorCode ? ERROR_HINTS[errorCode] : undefined;
+  const errorHint = errorCode ? UPLOAD_ERROR_HINTS[errorCode] : undefined;
 
   return (
     <div className="upload-widget">
@@ -150,7 +139,7 @@ export function OfficialFileUpload({
         >
           选择文件
         </button>
-        <small>支持图片 / 音频 / PDF，单文件不超过 {formatFileSize(MAX_BYTES)}</small>
+        <small>支持图片 / 音频 / PDF，单文件不超过 {formatFileSize(UPLOAD_MAX_BYTES)}</small>
         <input
           ref={input}
           type="file"

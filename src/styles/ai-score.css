@@ -1,0 +1,141 @@
+/* AI 试评页:表单/分组/证据高亮/结果(自 App.css 顺序拆出,级联顺序不变) */
+
+/* AI 试评页：源码此前没有 textarea，勾选项也没有统一样式，按 input/select 的风格就近补上 */
+textarea {
+  font: inherit;
+  color: inherit;
+  background: #fff;
+  border: 1px solid #dde4dc;
+  border-radius: 7px;
+  padding: 10px 12px;
+  resize: vertical;
+}
+
+.checkbox-field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+/* AI 试评页：分组用轻量容器而不是面板套面板，动作按钮统一放进弹性行，避免被拉成整宽 */
+.ai-group {
+  margin-top: 18px;
+  padding: 14px 16px;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #fbfdfa;
+}
+
+.ai-group-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.ai-image-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.ai-image-row select {
+  min-width: 210px;
+}
+
+.ai-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-top: 18px;
+}
+
+/* 面板本身不含内边距（见 .panel），本页沿用 .upload-panel / .resource-list 的约定自带内边距与面板间距 */
+.ai-panel {
+  margin-top: 24px;
+  padding: 22px 26px;
+}
+
+.ai-tabs {
+  margin-bottom: 18px;
+}
+
+.ai-fields {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.ai-fields .form-field {
+  margin-top: 0;
+  min-width: 220px;
+}
+
+/* 面板内的小节标题（图片分组 / 宏观结构…）自带间距：.section-title 本身没有外边距，
+   否则会紧贴上一块内容 */
+.ai-panel h3.section-title {
+  margin-top: 26px;
+}
+
+/* 结果区的表格在带内边距的面板里，横向留白交给面板；表头行不再重复描边 */
+.ai-panel .table-scroll {
+  margin-top: 14px;
+}
+
+.ai-panel .table-scroll table {
+  width: 100%;
+}
+
+.evidence-mark {
+  background: #edf3ec;
+  color: var(--green-dark);
+  border-radius: 3px;
+  padding: 0 2px;
+}
+
+.evidence-list {
+  margin: 8px 0 0;
+  padding-left: 18px;
+  font-size: 12px;
+}
+
+.evidence-quote {
+  margin-top: 6px;
+  padding: 10px 12px;
+  background: var(--soft);
+  border-radius: 7px;
+  line-height: 1.7;
+}
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-top: 25px;
+}
+.generated-codes {
+  display: grid;
+  gap: 10px;
+  background: #f7f9f4;
+  padding: 18px;
+  margin-top: 16px;
+  border-radius: 8px;
+  max-height: 280px;
+  overflow: auto;
+}
+.generated-codes code {
+  font-size: 13px;
+  user-select: all;
+}
+.content-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 270px;
+  gap: 24px;
+  align-items: start;
+}

@@ -12,14 +12,14 @@ import {
 import { clearAccessToken, setAccessToken } from "./auth";
 
 /**
- * 网络层守的是契约里那句话：**页面按 `code` 分支，不按 HTTP 状态码**。
+ * 网络层守的是契约里那句话：页面按 `code` 分支，不按 HTTP 状态码。
  * 所以这里逐条验证「任意失败都能拿到稳定的 code」，包括服务端没给包络的情况。
  */
 
 /**
  * 用自定义 adapter 代替真实网络：axios 支持的官方扩展点，不需要额外依赖。
  *
- * 注意：自定义 adapter **不经过 axios 的 `validateStatus`**，非 2xx 必须自己抛，
+ * 注意：自定义 adapter 不经过 axios 的 `validateStatus`，非 2xx 必须自己抛，
  * 否则响应会走成功分支。这里按内置 adapter 的行为抛，测试才代表真实运行。
  */
 function respondWith(status: number, data: unknown) {

@@ -1,0 +1,205 @@
+/* 登录与 404(自 App.css 顺序拆出,级联顺序不变) */
+
+.login-page {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: #fff;
+}
+.login-story {
+  min-height: 100vh;
+  background: #eff2e7;
+  padding: 42px 9%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+.login-story .brand-symbol {
+  background: #436a50;
+}
+.login-story .brand span:not(.brand-symbol) {
+  color: #8b987a;
+}
+.login-intro {
+  margin: auto 0;
+}
+.login-intro > .eyebrow {
+  font-size: 9px;
+  color: #91a17e;
+}
+.login-intro h1 {
+  font-size: clamp(28px, 3.2vw, 47px);
+  line-height: 1.6;
+  letter-spacing: 2px;
+  color: #3d624b;
+  margin: 25px 0 21px;
+  font-weight: 500;
+}
+.login-intro > p {
+  line-height: 2;
+  font-size: 13px;
+  color: #8a987d;
+}
+.login-story > small {
+  color: #a1ac91;
+  font-size: 10px;
+  letter-spacing: 1px;
+}
+.growth-art {
+  position: relative;
+  height: 285px;
+  width: 350px;
+  max-width: 100%;
+  margin: 25px auto 0;
+}
+.art-ring {
+  position: absolute;
+  border: 1px solid #dce3cd;
+  border-radius: 50%;
+  width: 246px;
+  height: 246px;
+  left: 35px;
+  top: 20px;
+}
+.ring-two {
+  width: 185px;
+  height: 185px;
+  left: 66px;
+  top: 51px;
+}
+.stem {
+  position: absolute;
+  width: 3px;
+  height: 151px;
+  background: #72845e;
+  left: 156px;
+  top: 96px;
+  transform: rotate(-4deg);
+  transform-origin: bottom;
+}
+.leaf-shape {
+  position: absolute;
+  width: 92px;
+  height: 135px;
+  border-radius: 90px 0 90px 0;
+}
+.leaf-left {
+  background: #a9bb8b;
+  left: 71px;
+  top: 79px;
+  transform: rotate(-64deg);
+}
+.leaf-right {
+  background: #5d7b54;
+  left: 161px;
+  top: 35px;
+  transform: rotate(9deg);
+}
+.art-sun {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: #dfbd7b;
+  position: absolute;
+  left: 48px;
+  top: 15px;
+}
+.art-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #c1ccae;
+  position: absolute;
+}
+.dot-one {
+  right: 30px;
+  top: 110px;
+}
+.dot-two {
+  left: 32px;
+  top: 196px;
+  width: 5px;
+  height: 5px;
+}
+.art-caption {
+  position: absolute;
+  right: 0;
+  bottom: 30px;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 11px;
+  color: #819371;
+  background: #fffdf3e0;
+  padding: 14px 19px;
+  border-radius: 9px;
+  transform: rotate(-5deg);
+  box-shadow: 0 6px 15px #58694208;
+}
+.login-form-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  padding: 70px 40px;
+}
+.login-form {
+  width: 345px;
+  max-width: 100%;
+}
+.login-form h2 {
+  font-size: 27px;
+  color: #354f40;
+  margin: 14px 0;
+}
+.login-form > p {
+  font-size: 12px;
+  color: #95a08e;
+  margin-bottom: 34px;
+}
+.login-form > label {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 12px;
+  color: #66775d;
+  margin-bottom: 21px;
+}
+.login-form input {
+  height: 46px;
+  background: #fcfdf9;
+  padding: 12px 14px;
+  font-size: 13px;
+}
+.login-submit {
+  width: 100%;
+  height: 46px;
+  margin-top: 7px;
+  justify-content: space-between;
+  padding-inline: 17px;
+}
+.demo-login-note {
+  margin-top: 28px;
+  padding: 16px;
+  background: #f8faf5;
+  border: 1px solid #eef1e7;
+  border-radius: 8px;
+}
+.demo-login-note .demo-pill {
+  font-size: 9px;
+  padding: 3px 7px;
+}
+.demo-login-note p {
+  font-size: 10px;
+  color: #96a08c;
+  line-height: 1.9;
+  margin-top: 9px;
+}
+.login-footnote {
+  position: absolute;
+  bottom: 35px;
+  font-size: 10px;
+  color: #b0b8a6;
+  letter-spacing: 1px;
+}

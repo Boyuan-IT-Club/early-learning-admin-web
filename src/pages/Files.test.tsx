@@ -7,7 +7,7 @@ import { apiClient } from "../api/client";
 import { Files } from "./Files";
 
 /**
- * 官方素材页守的是 M13 的两条验收：真实上传能出现在列表里；删除被引用的文件要给出**原因**。
+ * 官方素材页守的是 M13 的两条验收：真实上传能出现在列表里；删除被引用的文件要给出原因。
  */
 
 type Route = { status: number; body: unknown };
@@ -151,7 +151,7 @@ describe("official files page", () => {
     expect(upload).toBeDefined();
     const form = upload?.data as FormData;
     expect(form.get("file_kind")).toBe("IMAGE");
-    // 上传成功后重新拉列表：断言新文件真的出现在**列表里**，而不是数请求次数。
+    // 上传成功后重新拉列表：断言新文件真的出现在列表里，而不是数请求次数。
     // 必须限定在表格内：成功结果盒里也有同一个文件名，全局查询会命中多个而抛错（曾因此 flaky）。
     const table = screen.getByRole("table");
     expect(await within(table).findByText("新图.png")).toBeInTheDocument();

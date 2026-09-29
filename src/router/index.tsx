@@ -1,33 +1,22 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import type { Dispatch, SetStateAction } from "react";
-import type { License } from "../demo/data";
 import { AdminLayout } from "../layouts/AdminLayout";
 import { Login } from "../pages/Login";
-import { Licenses } from "../pages/Licenses";
-import { Teachers } from "../pages/Teachers";
-import { AiScore } from "../pages/AiScore";
-import { ApiUsage } from "../pages/ApiUsage";
-import { Content } from "../pages/Content";
+import { AiScore } from "../pages/ai-score";
 import { Files } from "../pages/Files";
+
 interface Props {
   signedIn: boolean;
   onSessionChange: (value: boolean) => void;
-  licenses: License[];
-  onLicensesChange: Dispatch<SetStateAction<License[]>>;
 }
-export function AppRoutes({
-  signedIn,
-  onSessionChange,
-  licenses,
-  onLicensesChange,
-}: Props) {
+
+export function AppRoutes({ signedIn, onSessionChange }: Props) {
   return (
     <Routes>
       <Route
         path="/login"
         element={
           signedIn ? (
-            <Navigate to="/licenses" replace />
+            <Navigate to="/files" replace />
           ) : (
             <Login onLogin={() => onSessionChange(true)} />
           )
@@ -42,26 +31,8 @@ export function AppRoutes({
           )
         }
       >
-        <Route index element={<Navigate to="/licenses" replace />} />
-        <Route
-          path="/licenses"
-          element={<Licenses licenses={licenses} onChange={onLicensesChange} />}
-        />
-        <Route path="/teachers" element={<Teachers />} />
-        <Route
-          path="/content/courses"
-          element={<Content key="courses" kind="courses" />}
-        />
-        <Route
-          path="/content/assessments"
-          element={<Content key="assessments" kind="assessments" />}
-        />
-        <Route
-          path="/content/dictionaries"
-          element={<Content key="dictionaries" kind="dictionaries" />}
-        />
+        <Route index element={<Navigate to="/files" replace />} />
         <Route path="/files" element={<Files />} />
-        <Route path="/api-usage" element={<ApiUsage />} />
         <Route path="/ai-score" element={<AiScore />} />
         <Route
           path="*"
@@ -70,8 +41,8 @@ export function AppRoutes({
               <span className="eyebrow">404</span>
               <h1>这片叶子飘远了</h1>
               <p>请从左侧导航选择一个页面。</p>
-              <a className="button primary" href="/licenses">
-                返回激活码管理
+              <a className="button primary" href="/files">
+                返回官方素材
               </a>
             </div>
           }

@@ -3,13 +3,13 @@ import { AxiosError, type AxiosResponse, type InternalAxiosRequestConfig } from 
 import { act, cleanup, fireEvent, render, screen, waitFor, within } from "@testing-library/react";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import "@testing-library/jest-dom/vitest";
-import { apiClient } from "../api/client";
-import { AiScore } from "./AiScore";
+import { apiClient } from "../../api/client";
+import { AiScore } from "./index";
 
 /**
  * AI 试评页守的是三件事：
- * 1. 提交时带齐契约要求的字段（字段名写错后端会 400，而页面看不出为什么）；
- * 2. **任务失败不是 HTTP 错误**——200 + stage=FAILED，页面必须按 stage 渲染出失败码与下一步；
+ * 1. 提交时带齐的字段（字段名写错后端会 400，而页面看不出为什么）；
+ * 2. 任务失败不是 HTTP 错误——200 + stage=FAILED，页面必须按 stage 渲染出失败码与下一步；
  * 3. 本地校验没过之前不发请求（图片超限、没勾确认）。
  */
 
