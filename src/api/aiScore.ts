@@ -7,11 +7,11 @@ import { get, post } from "./client";
  * `/api/ai/score`、`/api/ai/score-answer`、`/api/ai/tasks/{task_id}`、`/api/ai/rubrics`。
  *
  * 三个容易踩的点，先说在前面：
- * 1. **提交只拿任务凭据**（202 + `TaskHandle`），结果要自己轮询；任务失败**不是** HTTP 错误，
+ * 1. 提交只拿任务凭据（202 + `TaskHandle`），结果要自己轮询；任务失败不是 HTTP 错误，
  *    而是 200 + `code: "OK"` + `data.stage === "FAILED"`，失败原因在 `data.failure`。
- * 2. **图片三形态都收**：`SERVER_FETCH`（只给编号，服务端取图，故事与单题都支持）、
- *    `INLINE_IMAGE`（内联 base64，**不带 `data:` 前缀**）、`CONFIRMED_DESCRIPTION`（教师确认说明）。
- * 3. **评分标准版本**首次可省略，服务端用当前版本；后续重试要沿用凭据里回的**实际版本**。
+ * 2. 图片三形态都收：`SERVER_FETCH`（只给编号，服务端取图，故事与单题都支持）、
+ *    `INLINE_IMAGE`（内联 base64，不带 `data:` 前缀）、`CONFIRMED_DESCRIPTION`（教师确认说明）。
+ * 3. 评分标准版本首次可省略，服务端用当前版本；后续重试要沿用凭据里回的实际版本。
  */
 
 export type BusinessType = "ASSESSMENT" | "CLASSROOM";

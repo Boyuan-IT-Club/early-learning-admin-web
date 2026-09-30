@@ -3,7 +3,7 @@ import { get, post, postForm } from "./client";
 /**
  * 官方文件（零散素材）接口。
  *
- * 契约里 `/admin/files` 上传的是**零散素材**：音频、PDF、图片三类。
+ * 契约里 `/admin/files` 上传的是零散素材：音频、PDF、图片三类。
  * 课程与评估材料走整包发布，不从这里上传 ZIP——那是另一套接口。
  */
 
@@ -59,7 +59,7 @@ export function listFiles(query: ListFilesQuery = {}): Promise<AdminFilePage> {
 /**
  * 上传单个官方素材。
  *
- * `idempotencyKey` 由调用方持有：**同一个文件的重发必须沿用它**，服务端据此不重复创建
+ * `idempotencyKey` 由调用方持有：同一个文件的重发必须沿用它，服务端据此不重复创建
  * （契约：同标识同输入不重复创建，不同输入返回 409 `IDEMPOTENCY_CONFLICT`）。
  *
  * `file_name` 只在需要覆盖显示名时给；不给就用文件名本身。

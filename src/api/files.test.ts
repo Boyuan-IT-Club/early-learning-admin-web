@@ -5,7 +5,7 @@ import { ApiError, apiClient } from "./client";
 import { deleteOfficialFile, listFiles, uploadOfficialFile } from "./files";
 
 /**
- * 这些用例守的是**线上形状**：路径、query 参数名、multipart 字段名、必需 header。
+ * 这些用例守的是线上形状：路径、query 参数名、multipart 字段名、必需 header。
  * 字段名写错在浏览器里只会得到一个 400，与其在页面上排查，不如在这里钉住。
  */
 

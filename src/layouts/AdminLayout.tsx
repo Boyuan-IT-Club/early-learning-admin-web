@@ -4,28 +4,8 @@ import { Brand, Icon } from "../components/ui";
 import type { IconName } from "../components/ui";
 const links: { path: string; label: string; icon: IconName; group: string }[] =
   [
-    { path: "/licenses", label: "激活码管理", icon: "key", group: "账号管理" },
-    { path: "/teachers", label: "教师账号", icon: "users", group: "账号管理" },
-    {
-      path: "/content/courses",
-      label: "课程材料",
-      icon: "book",
-      group: "内容管理",
-    },
-    {
-      path: "/content/assessments",
-      label: "评估材料",
-      icon: "clipboard",
-      group: "内容管理",
-    },
-    {
-      path: "/content/dictionaries",
-      label: "字典材料",
-      icon: "dictionary",
-      group: "内容管理",
-    },
     { path: "/files", label: "官方素材", icon: "file", group: "内容管理" },
-    { path: "/api-usage", label: "API 用量", icon: "usage", group: "使用情况" },
+    { path: "/materials", label: "评估材料", icon: "book", group: "内容管理" },
     { path: "/ai-score", label: "AI 试评", icon: "clipboard", group: "使用情况" },
   ];
 export function AdminLayout({ onLogout }: { onLogout: () => void }) {
@@ -47,7 +27,7 @@ export function AdminLayout({ onLogout }: { onLogout: () => void }) {
       >
         <Brand />
         <nav aria-label="主导航">
-          {["账号管理", "内容管理", "使用情况"].map((group) => (
+          {["内容管理", "使用情况"].map((group) => (
             <div className="nav-group" key={group}>
               <p>{group}</p>
               {links

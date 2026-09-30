@@ -2,7 +2,8 @@
 
 早期困难儿童筛查与干预系统的 Web 管理端，使用 React、TypeScript 和 Vite。
 
-当前为 UI 演示，包含登录、激活码、教师账号、课程 / 评估 / 字典材料上传和 API 用量页面。使用本地示例数据，无需启动后端。
+其中**官方素材**（`/files`）与 **AI 试评**（`/ai-score`）已接真实后端；登录、激活码、教师账号、
+课程 / 评估 / 字典材料、API 用量仍是本地示例数据，不需要后端也能浏览。
 
 ## 本地开发
 
@@ -17,6 +18,11 @@ npm run dev
 ```
 
 打开终端显示的地址（默认 http://localhost:5173），点击「进入演示后台」即可体验。停止服务按 `Ctrl+C`。
+
+要体验**官方素材**与 **AI 试评**，需要后端在跑；后端默认用假实现（返回固定内容），
+要接真实大模型要在**后端**配 `AI_LLM_PROVIDER=ecnu` 与 ECNU 凭证——步骤见服务端仓库 README 的
+「接真实大模型（ECNU）」一节。开发服务默认把 `/api`、`/admin` 代理到 `http://localhost:8080`
+（见 `vite.config.ts` 的 `VITE_PROXY_TARGET`），后端不在本机就改这个变量。
 
 ## 常用命令
 
@@ -42,7 +48,8 @@ npm test
 
 ## 演示说明
 
-登录信息、激活码和上传结果均为演示，不会验证真实凭据或上传文件。具体操作与后续接口接入边界见 [UI 演示说明](docs/UI演示.md)。
+登录信息、激活码以及课程 / 评估 / 字典材料、API 用量均为演示，不会验证真实凭据；
+**官方素材**的上传删除与 **AI 试评**的评分调用是真实请求。具体操作与后续接口接入边界见 [UI 演示说明](docs/UI演示.md)。
 
 ## 目录说明
 
@@ -64,6 +71,8 @@ early-learning-admin-web/
 │  │  ├─ courses.ts         # 课程材料接口（待实现）
 │  │  ├─ assessments.ts     # 评估材料接口（待实现）
 │  │  ├─ dictionaries.ts   # 字典材料接口（待实现）
+│  │  ├─ files.ts          # 官方素材：真实接口
+│  │  ├─ aiScore.ts        # AI 评分：真实接口（评测目录 / 提交任务 / 轮询）
 │  │  └─ usage.ts           # API 用量接口（待实现）
 │  ├─ components/
 │  │  ├─ ui.tsx            # 图标、标题、状态标签、搜索框、空状态、弹窗等
@@ -105,15 +114,17 @@ early-learning-admin-web/
 
 ## 页面与路由
 
-| 路由                    | 页面文件                 | 说明                          |
-| ----------------------- | ------------------------ | ----------------------------- |
-| `/login`                | `src/pages/Login.tsx`    | 独立登录页                    |
-| `/licenses`             | `src/pages/Licenses.tsx` | 登录后的默认页                |
-| `/teachers`             | `src/pages/Teachers.tsx` | 教师账号                      |
-| `/content/courses`      | `src/pages/Content.tsx`  | `kind="courses"`              |
-| `/content/assessments`  | `src/pages/Content.tsx`  | `kind="assessments"`          |
-| `/content/dictionaries` | `src/pages/Content.tsx`  | `kind="dictionaries"`         |
-| `/api-usage`            | `src/pages/ApiUsage.tsx` | 可用 `?teacher=账号` 预选教师 |
+| 路由                    | 页面文件                 | 说明                                    |
+| ----------------------- | ------------------------ | --------------------------------------- |
+| `/login`                | `src/pages/Login.tsx`    | 独立登录页                              |
+| `/licenses`             | `src/pages/Licenses.tsx` | 登录后的默认页                          |
+| `/teachers`             | `src/pages/Teachers.tsx` | 教师账号                                |
+| `/content/courses`      | `src/pages/Content.tsx`  | `kind="courses"`                        |
+| `/content/assessments`  | `src/pages/Content.tsx`  | `kind="assessments"`                    |
+| `/content/dictionaries` | `src/pages/Content.tsx`  | `kind="dictionaries"`                   |
+| `/api-usage`            | `src/pages/ApiUsage.tsx` | 可用 `?teacher=账号` 预选教师           |
+| `/files`                | `src/pages/Files.tsx`    | 官方素材：真实上传 / 列表 / 标记删除    |
+| `/ai-score`             | `src/pages/AiScore.tsx`  | AI 试评：故事评分与单题评分（真实接口） |
 
 除登录页外，以上页面共用 `AdminLayout`。新增页面时，在 `src/router/index.tsx` 注册路由；需要导航入口时，同步修改 `src/layouts/AdminLayout.tsx` 的导航配置。
 
@@ -132,7 +143,7 @@ early-learning-admin-web/
 
 ### 接口与演示数据
 
-当前业务 API 文件仍为空，接口路径、字段、分页、认证和上传限制尚未正式对齐。不要根据示例数据推定接口契约，也不要将教师端接口或认证流程直接套到管理端。
+除 `files.ts`、`aiScore.ts` 已接真实接口外，其余业务 API 文件仍为空，接口路径、字段、分页、认证和上传限制尚未正式对齐。不要根据示例数据推定接口契约，也不要将教师端接口或认证流程直接套到管理端。
 
 接入真实服务时，先确认契约，再在对应 API 文件实现请求，最后替换页面中的示例数据与模拟行为。登录态、鉴权失败处理和上传结果应以服务端返回为准；当前 `sessionStorage` 演示标记不能作为正式认证。
 

@@ -1,0 +1,379 @@
+/* 上传控件与官方素材页(自 App.css 顺序拆出,级联顺序不变) */
+
+.upload-panel {
+  padding: 26px;
+}
+.section-title {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+.section-title h2 {
+  font-size: 15px;
+  line-height: 1.7;
+}
+.section-title p {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 5px;
+  line-height: 1.8;
+}
+.section-icon {
+  background: #eff4ec;
+  color: #74936a;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+}
+.dropzone {
+  margin-top: 25px;
+  border: 1.5px dashed #cddac6;
+  border-radius: 10px;
+  background: #fafcf7;
+  text-align: center;
+  padding: 29px 15px 24px;
+  transition:
+    background 0.15s,
+    border-color 0.15s;
+}
+.dropzone.dragging {
+  background: #e5efdf;
+  border-color: var(--green);
+}
+.dropzone.is-busy {
+  opacity: 0.6;
+}
+.upload-cloud {
+  display: grid;
+  place-items: center;
+  margin: 0 auto 17px;
+  width: 55px;
+  height: 55px;
+  border-radius: 16px;
+  background: #edf3e6;
+  color: #8fa779;
+}
+.dropzone h3 {
+  font-size: 15px;
+  font-weight: 500;
+}
+.dropzone p {
+  font-size: 11px;
+  color: #949c8c;
+  margin: 9px 0 17px;
+}
+.dropzone small {
+  display: block;
+  color: #9ea68f;
+  font-size: 10px;
+  margin-top: 17px;
+}
+.sample-button {
+  display: flex;
+  margin: 14px auto 0;
+  font-size: 11px;
+}
+.selected-file {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 13px;
+  margin-top: 17px;
+  min-width: 0;
+}
+.file-icon {
+  width: 40px;
+  height: 44px;
+  border-radius: 7px;
+  background: #edf2e8;
+  display: grid;
+  place-items: center;
+  color: #8fa278;
+  flex-shrink: 0;
+}
+.selected-file > div {
+  min-width: 0;
+}
+.selected-file strong {
+  font-size: 12px;
+  overflow-wrap: anywhere;
+  font-weight: 500;
+}
+.selected-file small {
+  display: block;
+  color: #9aa28e;
+  font-size: 10px;
+  margin-top: 6px;
+}
+.selected-file .icon-button {
+  margin-left: auto;
+  flex-shrink: 0;
+}
+.upload-actions {
+  margin-top: 23px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 15px;
+}
+.upload-actions label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--muted);
+  font-size: 11px;
+}
+.upload-actions select {
+  font-size: 11px;
+  min-height: 36px;
+}
+.resource-guide {
+  padding: 25px;
+  background: #f0f2e8;
+  border-radius: 11px;
+  border: 1px solid #e7eadb;
+}
+.guide-illustration {
+  height: 116px;
+  position: relative;
+  margin-bottom: 20px;
+}
+.guide-illustration > span {
+  position: absolute;
+  left: 27px;
+  top: 2px;
+  display: grid;
+  place-items: center;
+  background: #fffef7;
+  width: 66px;
+  height: 86px;
+  border-radius: 6px;
+  font-family: Georgia, serif;
+  font-size: 40px;
+  color: #9aab7c;
+  transform: rotate(-12deg);
+  box-shadow: 7px 9px 0 #dce4cc;
+}
+.guide-illustration svg {
+  position: absolute;
+  left: 119px;
+  top: 44px;
+  color: #728956;
+  transform: rotate(13deg);
+}
+.guide-illustration i {
+  position: absolute;
+  width: 19px;
+  height: 19px;
+  border-radius: 50%;
+  background: #ddbe86;
+  left: 140px;
+  top: 2px;
+}
+.resource-guide h2 {
+  font-size: 22px;
+  line-height: 1.6;
+  margin: 12px 0 23px;
+  color: #647452;
+  letter-spacing: 1px;
+}
+.resource-guide ol {
+  list-style: none;
+  counter-reset: guide;
+  padding: 0;
+  margin: 0;
+}
+.resource-guide li {
+  position: relative;
+  padding: 0 0 20px 30px;
+  counter-increment: guide;
+}
+.resource-guide li:before {
+  content: counter(guide, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 2px;
+  color: #adb698;
+  font-size: 10px;
+}
+.resource-guide li strong {
+  font-size: 12px;
+  color: #6b785e;
+  font-weight: 500;
+}
+.resource-guide li p {
+  font-size: 10px;
+  line-height: 1.8;
+  color: #909a82;
+  margin-top: 5px;
+}
+.guide-note {
+  font-size: 10px;
+  color: #95a087;
+  line-height: 1.9;
+  border-top: 1px solid #dfe5d3;
+  padding-top: 17px;
+}
+.resource-list {
+  margin-top: 24px;
+  padding: 22px 26px;
+}
+.resource-list .section-title {
+  justify-content: space-between;
+}
+.resource-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+}
+.resource-name {
+  flex: 1;
+  min-width: 0;
+}
+.resource-name strong {
+  font-size: 13px;
+  font-weight: 500;
+}
+.resource-name p {
+  font-size: 10px;
+  color: var(--muted);
+  margin-top: 8px;
+}
+.resource-date {
+  font-size: 11px;
+  margin-right: 20px;
+}
+.upload-progress {
+  padding-top: 22px;
+  font-size: 11px;
+  color: #79906c;
+}
+.upload-progress > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+.upload-progress p {
+  font-size: 10px;
+  margin-top: 8px;
+  color: #98a18c;
+}
+progress {
+  width: 100%;
+  height: 6px;
+  margin-top: 12px;
+  appearance: none;
+  border: 0;
+  border-radius: 9px;
+  overflow: hidden;
+}
+progress::-webkit-progress-bar {
+  background: #eaf0e4;
+}
+progress::-webkit-progress-value {
+  background: #78986b;
+  transition: width 0.15s;
+}
+progress::-moz-progress-bar {
+  background: #78986b;
+}
+.result-box {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 18px 15px;
+  border: 1px solid;
+  border-radius: 8px;
+  margin-top: 20px;
+  overflow-wrap: anywhere;
+}
+.result-box strong {
+  font-size: 12px;
+}
+.result-box p {
+  font-size: 11px;
+  line-height: 1.8;
+  margin-top: 6px;
+}
+.result-box small {
+  font-size: 10px;
+  line-height: 1.9;
+  display: block;
+  margin-top: 7px;
+}
+.result-box code {
+  font-size: 10px;
+  display: block;
+  margin-top: 5px;
+}
+.success-result {
+  background: #f0f6eb;
+  border-color: #dde9d4;
+  color: #648454;
+}
+.error-result {
+  background: #fff5ed;
+  border-color: #f1decf;
+  color: #a56f4e;
+}
+.error-message {
+  color: #ad6549;
+  font-size: 12px;
+  line-height: 1.8;
+  margin-top: 12px;
+}
+.not-found {
+  padding: 80px 20px;
+  text-align: center;
+}
+.not-found h1 {
+  margin: 15px 0;
+}
+.not-found p {
+  color: var(--muted);
+  margin-bottom: 25px;
+}
+.mobile-menu,
+.sidebar-overlay {
+  display: none;
+}
+
+/* 批量上传队列:每个文件一行,自带状态、编号与操作 */
+.upload-queue {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 8px;
+}
+
+.upload-queue-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid var(--line, #dcdcd2);
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+
+.upload-queue-main {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+
+.upload-queue-main code {
+  font-size: 12px;
+}

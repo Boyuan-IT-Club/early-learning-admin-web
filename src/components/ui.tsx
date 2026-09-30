@@ -130,10 +130,11 @@ export function PageHeading({
 export function Badge({ status }: { status: string }) {
   const labels: Record<string, string> = {
     UNUSED: "待使用",
-    ACTIVE: "已激活",
     REVOKED: "已撤销",
     INACTIVE: "未激活",
     READY: "可用",
+    ACTIVE: "启用中",
+    DISABLED: "已停用",
     UPLOADING: "上传中",
     INVALID: "无效",
     DELETED: "已删除",

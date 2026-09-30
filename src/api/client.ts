@@ -28,7 +28,7 @@ export interface ApiErrorDetails {
  * 网络层自己产生的错误码。
  *
  * 服务端不可达、超时、或回了一个不是包络的响应时，没有业务 `code` 可用，
- * 但**页面仍然需要一个稳定值来分支**——所以这几条在这里定义，并以 `CLIENT_` 前缀
+ * 但页面仍然需要一个稳定值来分支——所以这几条在这里定义，并以 `CLIENT_` 前缀
  * 与服务端业务码区分开。
  */
 export const CLIENT_ERROR_CODES = {
@@ -56,7 +56,7 @@ const CLIENT_ERROR_MESSAGES: Record<ClientErrorCode, string> = {
 /**
  * 页面拿到的唯一错误类型。
  *
- * **`code` 原样来自服务端**（网络层不翻译、不改写、不按 HTTP 状态码另造一个）；
+ * `code` 原样来自服务端（网络层不翻译、不改写、不按 HTTP 状态码另造一个）；
  * 页面按 `code` 分支，需要定位时看 `details`。`httpStatus` 只用于诊断与日志。
  */
 export class ApiError extends Error {
@@ -130,7 +130,7 @@ function toApiError(error: unknown): ApiError {
 
   if (status === 401) {
     // 服务端的安全层可能直接回 401 而不带包络（例如 Spring Security 的入口点），
-    // 所以这里按**状态码**判断，而不是等业务码。
+    // 所以这里按状态码判断，而不是等业务码。
     clearAccessToken();
     unauthorizedHandler();
     return envelope
@@ -188,7 +188,7 @@ function readEnvelope(payload: unknown): ApiEnvelope<unknown> | undefined {
 /**
  * 统一请求入口：解包包络后返回 `data`，失败一律抛 {@link ApiError}。
  *
- * 契约要求「`code === "OK"` 才解包」，所以这里按 `code` 判断，**不看 HTTP 状态码**：
+ * 「`code === "OK"` 才解包」，所以这里按 `code` 判断，不看 HTTP 状态码：
  * 200 也可能带业务失败码。
  */
 async function request<T>(config: AxiosRequestConfig): Promise<T> {
