@@ -39,3 +39,25 @@ export const UPLOAD_ERROR_HINTS: Record<string, string> = {
   INVALID_REQUEST: "服务端认为本次请求不合法，请检查文件名与类型。",
   DEPENDENCY_UNAVAILABLE: "服务端依赖暂不可用（对象存储等），请稍后重试。",
 };
+
+/** 账号与鉴权失败码 → 人话补充（管理员登录、激活码、教师管理共用）。表里没有的码只显示服务端 message。 */
+export const ACCOUNT_ERROR_HINTS: Record<string, string> = {
+  INVALID_CREDENTIALS: "账号或密码不正确。",
+  ACCOUNT_DISABLED: "该管理员账号已被停用，请联系其他管理员。",
+  RATE_LIMITED: "尝试次数过多，请稍后再试（连续输错 5 次会锁定 15 分钟）。",
+  LICENSE_UNAVAILABLE: "所选激活码中有不存在或已撤销的，操作已整体取消。",
+  SENSITIVE_RESULT_EXPIRED: "生成结果已超过 10 分钟不能再次查看。这批码未交付，请整批撤销后重新生成。",
+  ADMIN_LAST_ACTIVE: "不能停用自己，系统中至少要保留一个可用管理员。",
+  USERNAME_EXISTS: "用户名已被占用。",
+  RESOURCE_NOT_FOUND: "记录已不存在，请刷新列表。",
+  DEPENDENCY_UNAVAILABLE: "服务端鉴权存储暂不可用，请稍后重试。",
+};
+
+/** 与服务端 `AdminAccount` 的密码规则一致：10–72 字节（BCrypt 只取前 72 字节）。服务端仍为准。 */
+export const ADMIN_PASSWORD_MIN = 10;
+
+/** 与服务端一次批量生成的上限一致。 */
+export const LICENSE_BATCH_MAX = 200;
+
+/** 与服务端操作原因的长度上限一致。 */
+export const REASON_MAX = 200;

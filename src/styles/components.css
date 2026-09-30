@@ -519,3 +519,28 @@ tbody tr:hover {
   white-space: pre-wrap;
   word-break: break-all;
 }
+
+/* 激活码 / 恢复码一次性展示：等宽、可整段选中复制 */
+.code-list {
+  max-height: 320px;
+  overflow: auto;
+  margin: 12px 0;
+  padding: 12px 16px;
+  list-style: none;
+  border-radius: 12px;
+  background: var(--soft);
+  user-select: all;
+}
+
+.code-list li {
+  padding: 4px 0;
+  font-size: 15px;
+  letter-spacing: 0.04em;
+}
+
+.row-actions {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  justify-content: flex-end;
+}
