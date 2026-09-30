@@ -3,6 +3,7 @@ import { AdminLayout } from "../layouts/AdminLayout";
 import { Login } from "../pages/Login";
 import { AiScore } from "../pages/ai-score";
 import { Files } from "../pages/Files";
+import { Materials } from "../pages/Materials";
 
 interface Props {
   signedIn: boolean;
@@ -33,6 +34,7 @@ export function AppRoutes({ signedIn, onSessionChange }: Props) {
       >
         <Route index element={<Navigate to="/files" replace />} />
         <Route path="/files" element={<Files />} />
+        <Route path="/materials" element={<Materials />} />
         <Route path="/ai-score" element={<AiScore />} />
         <Route
           path="*"

@@ -5,6 +5,7 @@ import type { IconName } from "../components/ui";
 const links: { path: string; label: string; icon: IconName; group: string }[] =
   [
     { path: "/files", label: "官方素材", icon: "file", group: "内容管理" },
+    { path: "/materials", label: "评估材料", icon: "book", group: "内容管理" },
     { path: "/ai-score", label: "AI 试评", icon: "clipboard", group: "使用情况" },
   ];
 export function AdminLayout({ onLogout }: { onLogout: () => void }) {

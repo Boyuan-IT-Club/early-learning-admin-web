@@ -303,7 +303,8 @@ tbody tr:hover {
   color: #6d9165;
 }
 .badge-revoked,
-.badge-inactive {
+.badge-inactive,
+.badge-disabled {
   background: #f0f2ef;
   color: #96a08f;
 }
@@ -487,4 +488,34 @@ tbody tr:hover {
 .form-field small {
   font-size: 10px;
   color: var(--muted);
+}
+
+/* 评估材料发布面板：文件选择与发布按钮同行，结果区展示冻结配置 */
+.material-publish {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.material-publish input[type="file"] {
+  flex: 1;
+  min-width: 220px;
+}
+
+.material-result {
+  margin-top: 14px;
+  padding: 12px 14px;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--surface-soft, rgba(46, 125, 90, 0.06));
+}
+
+.material-result pre {
+  max-height: 320px;
+  overflow: auto;
+  font-size: 12px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-all;
 }
