@@ -1,13 +1,34 @@
 import { useState } from "react";
 import type { FormEvent } from "react";
+import { login } from "../api/auth";
+import { ErrorNotice } from "../components/ErrorNotice";
 import { Brand, Icon } from "../components/ui";
+
+/**
+ * 管理员登录。账号密码错误与账号不存在回同一个错误码（服务端防探测），这里也只说"不正确"。
+ */
 export function Login({ onLogin }: { onLogin: () => void }) {
-  const [username, setUsername] = useState("demo_admin");
-  const [password, setPassword] = useState("demo123");
-  function submit(event: FormEvent) {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [failure, setFailure] = useState<unknown>(null);
+
+  async function submit(event: FormEvent) {
     event.preventDefault();
-    if (username.trim() && password.trim()) onLogin();
+    if (!username.trim() || !password || submitting) return;
+    setSubmitting(true);
+    setFailure(null);
+    try {
+      await login(username.trim(), password);
+      onLogin();
+    } catch (error) {
+      setFailure(error);
+      setPassword("");
+    } finally {
+      setSubmitting(false);
+    }
   }
+
   return (
     <div className="login-page">
       <section className="login-story">
@@ -65,21 +86,14 @@ export function Login({ onLogin }: { onLogin: () => void }) {
               required
             />
           </label>
+          <ErrorNotice error={failure} />
           <button
             className="button primary login-submit"
-            disabled={!username.trim() || !password.trim()}
+            disabled={!username.trim() || !password || submitting}
           >
-            进入演示后台
+            {submitting ? "登录中…" : "登录"}
             <Icon name="arrow" size={18} />
           </button>
-          <div className="demo-login-note">
-            <span className="demo-pill">UI 演示</span>
-            <p>
-              已填入演示信息，直接进入即可。
-              <br />
-              不会验证或发送账号密码，请勿输入真实凭据。
-            </p>
-          </div>
         </form>
         <span className="login-footnote">简单管理，用心支持。</span>
       </section>

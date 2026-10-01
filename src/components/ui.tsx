@@ -127,7 +127,8 @@ export function PageHeading({
     </div>
   );
 }
-export function Badge({ status }: { status: string }) {
+/** `label` 覆盖默认文案：同一个状态值在不同实体上叫法不同（激活码的 ACTIVE 是"已激活"）。 */
+export function Badge({ status, label }: { status: string; label?: string }) {
   const labels: Record<string, string> = {
     UNUSED: "待使用",
     REVOKED: "已撤销",
@@ -142,7 +143,7 @@ export function Badge({ status }: { status: string }) {
   return (
     <span className={`badge badge-${status.toLowerCase()}`}>
       <i />
-      {labels[status] ?? status}
+      {label ?? labels[status] ?? status}
     </span>
   );
 }

@@ -148,6 +148,27 @@ describe("api client", () => {
     expect(unauthorized).toHaveBeenCalledTimes(1);
   });
 
+  it("keeps the session when a 401 only means the password was wrong", async () => {
+    setAccessToken("token-abc");
+    respondWith(401, envelope("INVALID_CREDENTIALS", "账号密码不正确"));
+
+    const error = await post("/admin/login").catch((e: unknown) => e);
+
+    expect((error as ApiError).code).toBe("INVALID_CREDENTIALS");
+    expect(sessionStorage.getItem("early-learning-access-token")).toBe("token-abc");
+    expect(unauthorized).not.toHaveBeenCalled();
+  });
+
+  it("ends the session when the admin is disabled mid-session", async () => {
+    setAccessToken("token-abc");
+    respondWith(403, envelope("ACCOUNT_DISABLED", "账号不可用"));
+
+    await get("/admin/files").catch((e: unknown) => e);
+
+    expect(sessionStorage.getItem("early-learning-access-token")).toBeNull();
+    expect(unauthorized).toHaveBeenCalledTimes(1);
+  });
+
   it("maps a timeout to a stable client code", async () => {
     failWith({ code: AxiosError.ECONNABORTED, message: "timeout of 15000ms exceeded" });
 

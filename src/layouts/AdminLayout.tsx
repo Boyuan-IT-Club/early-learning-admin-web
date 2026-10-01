@@ -2,8 +2,13 @@ import { useState } from "react";
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { Brand, Icon } from "../components/ui";
 import type { IconName } from "../components/ui";
+import { getAdminName } from "../api/auth";
+const GROUPS = ["账号管理", "内容管理", "使用情况"];
 const links: { path: string; label: string; icon: IconName; group: string }[] =
   [
+    { path: "/licenses", label: "激活码管理", icon: "key", group: "账号管理" },
+    { path: "/teachers", label: "教师账号", icon: "users", group: "账号管理" },
+    { path: "/admins", label: "管理员", icon: "leaf", group: "账号管理" },
     { path: "/files", label: "官方素材", icon: "file", group: "内容管理" },
     { path: "/materials", label: "评估材料", icon: "book", group: "内容管理" },
     { path: "/ai-score", label: "AI 试评", icon: "clipboard", group: "使用情况" },
@@ -12,6 +17,7 @@ export function AdminLayout({ onLogout }: { onLogout: () => void }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation();
   const current = links.find((link) => link.path === location.pathname);
+  const adminName = getAdminName() ?? "管理员";
   return (
     <div className="app-shell">
       {menuOpen && (
@@ -27,7 +33,7 @@ export function AdminLayout({ onLogout }: { onLogout: () => void }) {
       >
         <Brand />
         <nav aria-label="主导航">
-          {["内容管理", "使用情况"].map((group) => (
+          {GROUPS.map((group) => (
             <div className="nav-group" key={group}>
               <p>{group}</p>
               {links
@@ -52,9 +58,9 @@ export function AdminLayout({ onLogout }: { onLogout: () => void }) {
           <span>每一份支持，都有意义。</span>
         </div>
         <div className="sidebar-bottom">
-          <span className="avatar">管</span>
+          <span className="avatar">{adminName.slice(0, 1).toUpperCase()}</span>
           <div>
-            <strong>演示管理员</strong>
+            <strong>{adminName}</strong>
             <small>管理工作台</small>
           </div>
           <button
@@ -83,17 +89,12 @@ export function AdminLayout({ onLogout }: { onLogout: () => void }) {
             <span className="breadcrumb-slash">/</span>
             <strong>{current?.label ?? "页面未找到"}</strong>
           </div>
-          <span className="demo-pill">
-            <i />
-            演示模式
-          </span>
         </header>
         <main id="main-content">
           <Outlet />
         </main>
         <footer className="workspace-footer">
           <span>初芽 · 为每一次成长提供支持</span>
-          <span>示例数据，仅供界面体验</span>
         </footer>
       </div>
     </div>
