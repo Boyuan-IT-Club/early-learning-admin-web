@@ -39,3 +39,31 @@ export const UPLOAD_ERROR_HINTS: Record<string, string> = {
   INVALID_REQUEST: "服务端认为本次请求不合法，请检查文件名与类型。",
   DEPENDENCY_UNAVAILABLE: "服务端依赖暂不可用（对象存储等），请稍后重试。",
 };
+
+/** 账号与鉴权失败码 → 人话补充（管理员、激活码、教师管理共用）。表里没有的码只显示服务端 message。 */
+export const ACCOUNT_ERROR_HINTS: Record<string, string> = {
+  INVALID_CREDENTIALS: "账号或密码不正确。",
+  ACCOUNT_DISABLED: "该管理员账号已被停用，请联系其他管理员。",
+  RATE_LIMITED: "尝试次数过多，请稍后再试（同一账号连续输错 5 次会锁定 15 分钟）。",
+  SENSITIVE_RESULT_EXPIRED: "生成结果已过期，不能再次查看原码。这批码没有交付出去，请逐个撤销后重新生成。",
+  LICENSE_REVOKED: "该教师绑定的激活码已撤销，不能再启用。",
+  USERNAME_EXISTS: "用户名已被占用（不区分大小写）。",
+  IDEMPOTENCY_CONFLICT: "同一次提交的内容被改过，请关闭后重新操作。",
+  RESOURCE_NOT_FOUND: "记录已不存在，请刷新列表。",
+  DEPENDENCY_UNAVAILABLE: "服务端鉴权存储暂不可用，请稍后重试。",
+};
+
+/** 契约 `Username`：3—64 位 ASCII 字母、数字、下划线、点或连字符；服务端转小写后唯一。 */
+export const USERNAME_PATTERN = /^[A-Za-z0-9_.-]{3,64}$/;
+
+/** 契约 `AdminPassword`：8—128 字符，不裁剪空白。 */
+export const ADMIN_PASSWORD_MIN = 8;
+export const ADMIN_PASSWORD_MAX = 128;
+
+/** 契约 `createLicenses.count`：1—100。 */
+export const LICENSE_BATCH_MAX = 100;
+
+/** 按字符（码点）计长度，与服务端一致。 */
+export function charLength(value: string): number {
+  return [...value].length;
+}

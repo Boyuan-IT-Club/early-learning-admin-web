@@ -128,9 +128,9 @@ function toApiError(error: unknown): ApiError {
   const status = error.response?.status;
   const envelope = readEnvelope(error.response?.data);
 
-  if (status === 401) {
+  if (endsSession(status, envelope?.code)) {
     // 服务端的安全层可能直接回 401 而不带包络（例如 Spring Security 的入口点），
-    // 所以这里按状态码判断，而不是等业务码。
+    // 所以没有包络的 401 也算会话失效。
     clearAccessToken();
     unauthorizedHandler();
     return envelope
@@ -171,6 +171,20 @@ function toApiError(error: unknown): ApiError {
     CLIENT_ERROR_MESSAGES.CLIENT_MALFORMED_RESPONSE,
     status,
   );
+}
+
+/**
+ * 这次失败是否意味着"登录态没了"。
+ *
+ * 不是所有 401 都是：登录时账号密码错、改密码时旧密码错都回 401 INVALID_CREDENTIALS，
+ * 那只是输错了，不能把人踢回登录页。只有凭证本身失效（TOKEN_*，或安全层回的无包络 401），
+ * 以及管理员在会话中途被停用（403 ACCOUNT_DISABLED），才清会话。
+ */
+function endsSession(status: number | undefined, code: string | undefined): boolean {
+  if (status === 401) {
+    return code === undefined || code.startsWith("TOKEN_");
+  }
+  return status === 403 && code === "ACCOUNT_DISABLED";
 }
 
 /** 只有形如包络的对象才认，避免把网关的 HTML/字符串当成业务响应。 */
@@ -232,4 +246,12 @@ export function postForm<T>(
   config?: AxiosRequestConfig,
 ): Promise<T> {
   return request<T>({ ...config, url, method: "POST", data: form });
+}
+
+export function patch<T>(
+  url: string,
+  body?: unknown,
+  config?: AxiosRequestConfig,
+): Promise<T> {
+  return request<T>({ ...config, url, method: "PATCH", data: body });
 }
